@@ -16,8 +16,8 @@
 	    return this.each(function(){
 		//-------------------options-------------------------------------------------------//
 		//change symbols
-		if (options.collapsedSymbol != "fa-plus") {
-		    $(this).find("i").removeClass("fa-plus").addClass(options.collapsedSymbol);
+		if (options.collapsedSymbol != "fa-plus-square-o") {
+		    $(this).find("i").removeClass("fa-plus-square-o").addClass(options.collapsedSymbol);
 		}
 
 		//hide checkboxes
@@ -233,8 +233,8 @@
 
     //options defaults
     $.fn.hummingbird.defaults = {
-	expandedSymbol: "fa-minus",
-	collapsedSymbol: "fa-plus",
+	expandedSymbol: "fa-minus-square-o",
+	collapsedSymbol: "fa-plus-square-o",
 	collapseAll: true,
 	checkboxes: "enabled",
 	checkDoubles: false,

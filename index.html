@@ -201,7 +201,9 @@
 window.onload=function(){
 
 $(document).ready(function(){
-  $("#treeview").hummingbird();
+  $("#treeview").hummingbird({
+	expandedSymbol: "fa-minus-square-o",
+	collapsedSymbol: "fa-plus-square-o"});
   $('input').iCheck({
     checkboxClass: 'icheckbox_minimal-red',
     radioClass: 'iradio_minimal-red',

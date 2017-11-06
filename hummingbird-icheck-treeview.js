@@ -449,7 +449,7 @@
 	    	}else{
 			var all_sum = $(this).siblings().addBack().children("label").children("div").children('input:checkbox').length;
 			if(state){
-				if(all_sum == checked_unchecked_sum){
+				if(all_sum == checked_unchecked_sum - indeterminate_sum){
 					$(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('determinate');
 					$(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
 				}else if(all_sum == checked_unchecked_sum + indeterminate_sum){

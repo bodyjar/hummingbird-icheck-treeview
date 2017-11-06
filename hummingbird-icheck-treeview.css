@@ -25,4 +25,6 @@
 .hummingbird-treeview .fa {
     font-style: normal;
     cursor: pointer;
+    vertical-align: middle;
+    font-size: 18px;
 }

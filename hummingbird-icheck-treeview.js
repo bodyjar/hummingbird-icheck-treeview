@@ -442,11 +442,17 @@
 	    	if ((indeterminate_sum + checked_unchecked_sum) == 0) {
 	    	    $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('determinate');
 	    	    if(state){
-              $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
-            }else{
-              $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('check');
-            }
-	    	}
+		      $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
+		    }else{
+		      $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('check');
+		    }
+	    	}else{
+			var all_sum = $(this).siblings().addBack().children("label").children("div").children('input:checkbox').length;
+			if(all_sum == checked_unchecked_sum){
+				$(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('determinate');
+				$(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('check');
+			}
+		}
 
 		//disabling the node is done after it has been triggered, thus if a node has been disabled
 		//i.e. nodeDisabled == true then the not_disabled_sum is actually smaller by one

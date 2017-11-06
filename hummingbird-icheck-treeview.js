@@ -432,7 +432,7 @@
 	    //thus, set parents checked / unchecked, if children are all checked or all unchecked with no indeterminates
 	    $(this).parent("div").parent("label").parents("li").map(function() {
 	    	var indeterminate_sum = 0;
-	    	var checked_unchecked_sum = $(this).siblings().addBack().children("label").children(checkSiblings).length;
+	    	var checked_unchecked_sum = $(this).siblings().addBack().children("label").children("div").children(checkSiblings).length;
 		if (checkDisabled) {
 		    var not_disabled_sum = $(this).siblings().addBack().children("label").children("div").children("input:checkbox:not(:disabled)").length;
 		}

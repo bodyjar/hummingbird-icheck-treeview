@@ -249,17 +249,17 @@
     
     //-------------------checkAll---------------//
     $.fn.hummingbird.checkAll = function(tree){
-	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('uncheck').trigger("ifClicked");
+	tree.children("li").children("label").children("div").children("input:checkbox").iCheck('determinate').iCheck('uncheck').trigger("ifClicked");
     };
 
     //-------------------uncheckAll---------------//
     $.fn.hummingbird.uncheckAll = function(tree){
-	//console.log(tree.children("li").children("label").children("input:checkbox"))
+	//console.log(tree.children("li").children("label").children("div").children("input:checkbox"))
 	//disable checking for doubles temporarily
 	uncheckAll_doubles = true;
-	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('check').trigger("ifClicked");
+	tree.children("li").children("label").children("div").children("input:checkbox").iCheck('determinate').iCheck('check').trigger("ifClicked");
 	uncheckAll_doubles = false;
-	//console.log(tree.children("li").children("label").children("input:checkbox"));
+	//console.log(tree.children("li").children("label").children("div").children("input:checkbox"));
     };
 
     //-------------------collapseAll---------------//
@@ -343,7 +343,7 @@
 	//for a disabled checked node, set node unchecked and then trigger a click to check
 	this_checkbox.iCheck('enable').parent("div").parent("label").parent("li").css({'color':'#636b6f'});
 	//all parents enabled
-	this_checkbox.parent("div").parent("label").parent("li").parents("li").children("label").children("input[type='checkbox']").iCheck('enable').parents("label").parent("li").css({'color':'#636b6f'});
+	this_checkbox.parent("div").parent("label").parent("li").parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('enable').parents("label").parent("li").css({'color':'#636b6f'});
 	//all children enabled
 	this_checkbox.parent("div").parent("label").parent("li").find('input:checkbox').iCheck('enable').parent("div").parent("label").parent("li").css({'color':'#636b6f'});	
 	if(state === false){
@@ -424,8 +424,8 @@
         nodes_below.iCheck('determinate').iCheck('check');
       }
 	    //set all parents indeterminate and unchecked
-	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("input[type='checkbox']").iCheck('indeterminate');
-	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("input[type='checkbox']").iCheck('uncheck');
+	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('indeterminate');
+	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
 	    //travel up the DOM
 	    //test if siblings are all checked / unchecked / indeterminate       
 	    //check / uncheck parents if all siblings are checked /unchecked
@@ -434,17 +434,17 @@
 	    	var indeterminate_sum = 0;
 	    	var checked_unchecked_sum = $(this).siblings().addBack().children("label").children(checkSiblings).length;
 		if (checkDisabled) {
-		    var not_disabled_sum = $(this).siblings().addBack().children("label").children("input:checkbox:not(:disabled)").length;
+		    var not_disabled_sum = $(this).siblings().addBack().children("label").children("div").children("input:checkbox:not(:disabled)").length;
 		}
-	    	$(this).siblings().addBack().children("label").children("input:checkbox").map(function() {
+	    	$(this).siblings().addBack().children("label").children("div").children("input:checkbox").map(function() {
 	    	    indeterminate_sum = indeterminate_sum + $(this).prop("indeterminate");
 	    	});
 	    	if ((indeterminate_sum + checked_unchecked_sum) == 0) {
-	    	    $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('determinate');
+	    	    $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('determinate');
 	    	    if(state){
-              $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('uncheck');
+              $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
             }else{
-              $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('check');
+              $(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('check');
             }
 	    	}
 
@@ -457,7 +457,7 @@
 			nodeDisabled = false;
 		    }
 		    if (not_disabled_sum == 0) {
-			$(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('disable').parent("div").parent("label").parent("li").css({'color':'#c8c8c8'});
+			$(this).parent().parent().children("label").children("div").children("input[type='checkbox']").iCheck('disable').parent("div").parent("label").parent("li").css({'color':'#c8c8c8'});
 		    }
 		}
 	    });
@@ -510,7 +510,7 @@
 		    //not if all checked or unchecked
 		    if (disabledCheckboxes.length > 0 && num_state_inverse_Checkboxes.length > 0) {
 			//only if the boxes are enabled
-			disabledCheckboxes.parent("div").parent("label").parent("li").parents("li").children("label").children("input:checkbox:not(:disabled)").iCheck('indeterminate').prop("checked",state);
+			disabledCheckboxes.parent("div").parent("label").parent("li").parents("li").children("label").children("div").children("input:checkbox:not(:disabled)").iCheck('indeterminate').prop("checked",state);
 		    }
 		}
 	    }

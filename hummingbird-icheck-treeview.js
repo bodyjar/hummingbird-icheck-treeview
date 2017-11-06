@@ -8,7 +8,10 @@
     $.fn.hummingbird = function(options){
 
 
-	var methodName = options;
+	var methodName;
+	  if(!options instanceof Object){
+		methodName = options;
+	  }
 	var args = arguments;
 	var options = $.extend( {}, $.fn.hummingbird.defaults, options);
 	//initialisation
@@ -17,7 +20,10 @@
 		//-------------------options-------------------------------------------------------//
 		//change symbols
 		if (options.collapsedSymbol != "fa-plus") {
-		    $(this).find("i").removeClass("fa-plus").addClass(options.collapsedSymbol);
+		    $(this).find("i.fa-plus").removeClass("fa-plus").addClass(options.collapsedSymbol);
+		}
+    		if (options.expandedSymbol != "fa-minus") {
+		    $(this).find("i.fa-minus").removeClass("fa-minus").addClass(options.expandedSymbol);
 		}
 
 		//hide checkboxes

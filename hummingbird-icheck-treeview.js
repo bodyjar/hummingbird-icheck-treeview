@@ -249,7 +249,7 @@
     
     //-------------------checkAll---------------//
     $.fn.hummingbird.checkAll = function(tree){
-	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('uncheck').trigger("click");
+	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('uncheck').trigger("ifClicked");
     };
 
     //-------------------uncheckAll---------------//
@@ -257,7 +257,7 @@
 	//console.log(tree.children("li").children("label").children("input:checkbox"))
 	//disable checking for doubles temporarily
 	uncheckAll_doubles = true;
-	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('check').trigger("click");
+	tree.children("li").children("label").children("input:checkbox").iCheck('determinate').iCheck('check').trigger("ifClicked");
 	uncheckAll_doubles = false;
 	//console.log(tree.children("li").children("label").children("input:checkbox"));
     };
@@ -311,12 +311,12 @@
 
     //-------------------checkNode---------------//
     $.fn.hummingbird.checkNode = function(tree,attr,name){
-	tree.find('input:checkbox:not(:checked)[' + attr + '=' + name + ']').iCheck('determinate').trigger("click");
+	tree.find('input:checkbox:not(:checked)[' + attr + '=' + name + ']').iCheck('determinate').trigger("ifClicked");
     };
 
     //-------------------uncheckNode---------------//
     $.fn.hummingbird.uncheckNode = function(tree,attr,name){
-	tree.find('input:checkbox:checked[' + attr + '=' + name + ']').iCheck('determinate').trigger("click");
+	tree.find('input:checkbox:checked[' + attr + '=' + name + ']').iCheck('determinate').trigger("ifClicked");
     };
 
     //-------------------disableNode---------------//
@@ -325,13 +325,13 @@
 	//for a disabled unchecked node, set node checked and then trigger a click to uncheck
 	//for a disabled checked node, set node unchecked and then trigger a click to check
 	if(state === false){
-    this_checkbox.iCheck('check');
-  }else{
     this_checkbox.iCheck('uncheck');
+  }else{
+    this_checkbox.iCheck('check');
   }
   
 	nodeDisabled = true;
-	this_checkbox.trigger("click");
+	this_checkbox.trigger("ifClicked");
 	//disable this node and all children
 	this_checkbox.parent("label").parent("li").find('input:checkbox').iCheck('disable').parent("label").parent("li").css({'color':'#c8c8c8'});
     };
@@ -347,12 +347,12 @@
 	//all children enabled
 	this_checkbox.parent("label").parent("li").find('input:checkbox').iCheck('enable').parent("label").parent("li").css({'color':'#636b6f'});	
 	if(state === false){
-    this_checkbox.iCheck('check');
-  }else{
     this_checkbox.iCheck('uncheck');
+  }else{
+    this_checkbox.iCheck('check');
   }
 	nodeDisabled = false;
-	this_checkbox.trigger("click");	
+	this_checkbox.trigger("ifClicked");	
     };
 
     //--------------get all checked items------------------//
@@ -399,9 +399,9 @@
     
     //--------------three-state-logic----------------------//
     $.fn.hummingbird.ThreeStateLogic = function(tree,doubleMode,allVariables,checkDoubles,checkDisabled) {
-	tree.find('input:checkbox').on('click', function(e) {
+	tree.find('input:checkbox').on('ifClicked', function(e) {
 	    //check / uncheck all checkboxes below that node, if they are not disabled
-	    var nodes_below = $(this).parent("label").parent("li").find("input:checkbox:not(:disabled)");
+	    var nodes_below = $(this).parent("div").parent("label").parent("li").find("input:checkbox:not(:disabled)");
 	    var ids = [];
 	    nodes_below.each(function(){
 		ids.push($(this).attr("id"));
@@ -419,9 +419,9 @@
 	    }		 		 
 	    //check / uncheck all checkboxes below that node
 	    if(state){
-        nodes_below.iCheck('determinate').iCheck('check');
-      }else{
         nodes_below.iCheck('determinate').iCheck('uncheck');
+      }else{
+        nodes_below.iCheck('determinate').iCheck('check');
       }
 	    //set all parents indeterminate and unchecked
 	    $(this).parent("label").parent().parents("li").children("label").children("input[type='checkbox']").iCheck('indeterminate');
@@ -442,9 +442,9 @@
 	    	if ((indeterminate_sum + checked_unchecked_sum) == 0) {
 	    	    $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('determinate');
 	    	    if(state){
-              $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('check');
-            }else{
               $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('uncheck');
+            }else{
+              $(this).parent().parent().children("label").children("input[type='checkbox']").iCheck('check');
             }
 	    	}
 
@@ -479,7 +479,7 @@
 	    		    var Zvar = allVariables[$(this).attr("data-id")];
 	    		    for (var i=0;i<L;i++) {
 	    			if ($("#" + Zvar[i] ).prop("checked") != state) {
-	    			    $("#" + Zvar[i] ).trigger("click");
+	    			    $("#" + Zvar[i] ).trigger("ifClicked");
 	    			}
 	    		    }
 	    		}
@@ -630,5 +630,3 @@
     }
     //----------------------------search--------------------------------------//
 })(jQuery);
-
-

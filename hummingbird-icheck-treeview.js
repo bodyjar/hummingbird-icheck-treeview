@@ -424,8 +424,8 @@
         nodes_below.iCheck('determinate').iCheck('check');
       }
 	    //set all parents indeterminate and unchecked
-	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('indeterminate');
 	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('uncheck');
+	    $(this).parent("div").parent("label").parent().parents("li").children("label").children("div").children("input[type='checkbox']").iCheck('indeterminate');
 	    //travel up the DOM
 	    //test if siblings are all checked / unchecked / indeterminate       
 	    //check / uncheck parents if all siblings are checked /unchecked
@@ -510,7 +510,12 @@
 		    //not if all checked or unchecked
 		    if (disabledCheckboxes.length > 0 && num_state_inverse_Checkboxes.length > 0) {
 			//only if the boxes are enabled
-			disabledCheckboxes.parent("div").parent("label").parent("li").parents("li").children("label").children("div").children("input:checkbox:not(:disabled)").iCheck('indeterminate').prop("checked",state);
+			if(state){
+			   	disabledCheckboxes.parent("div").parent("label").parent("li").parents("li").children("label").children("div").children("input:checkbox:not(:disabled)").iCheck("checked").iCheck('indeterminate');
+			}else{
+				disabledCheckboxes.parent("div").parent("label").parent("li").parents("li").children("label").children("div").children("input:checkbox:not(:disabled)").iCheck("unchecked").iCheck('indeterminate');
+			}
+			
 		    }
 		}
 	    }
